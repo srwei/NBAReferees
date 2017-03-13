@@ -1,0 +1,51 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>NBA Statistics Directory</title>
+        <link rel="stylesheet" type="text/css" href="{% static "/static/main.css" %}" />
+        <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        .header, .frame {
+            text-align: center;
+
+        }
+        .header {
+            background-color: rgb(250,131,32);
+
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>NBA Statistics Directory</h1>
+            <h3> 
+                <a href={% url 'home' %}>
+                    Home
+                </a> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href={% url 'search' %}>
+                    Search
+                </a> 
+            </h3>
+        </div>
+        <div class="frame">
+            <ul>
+                <li>
+                    This is the page for NBA Referees Statistics from the Last Two Minute Reports: <a href={% url 'refereestats' %}>here</a> <br>
+                    <br>
+                </li>
+                <li>This is the page for NBA Players Statistics from the Last Two Minute Reports: <a href={% url 'playerstats' %}>here</a> <br>
+                    <br>
+                </li>
+                <li>This is the page for more indepth analysis from the Last Two Minute Reports: <a href={% url 'statspdf' %}>here</a> 
+                </li>
+            </ul>
+        </div>
+    </body>
+</html>

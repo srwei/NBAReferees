@@ -1,0 +1,123 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>NBA Last Two Minute Reports Search</title>
+        <link rel="stylesheet" type="text/css" href="{% static "/static/main.css" %}" />
+        <style>
+        .ratios, .search, .resultcol, .resultratio, .searchcol, .searchentry, .gamelink, .gamelinkcol{
+            border: 1px solid black;
+
+        }
+        .searchentry, .gamelink, .resultratio {
+            text-align: center;
+        }
+
+        .hovercolor:hover {
+            background-color: orange;
+        }
+
+        th {
+            padding:0 15px 0 15px;
+        }
+
+        td, th {
+            text-align: : center;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+        }
+        .header {
+            background-color: rgb(250,131,32);
+        }
+        .form {
+            text-align: left
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>NBA Last Two Minute Reports Search</h1>
+            <h3> 
+                <a href={% url 'home' %}>
+                    Home
+                </a> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href={% url 'stats' %}>
+                    Statistics Home Page
+                </a> 
+            </h3>
+        </div>
+        <div class="frame">
+            <form method="get">
+                {% csrf_token %}
+                <table class="form">
+                {{ form }}
+                </table>
+                <input type="submit" value="Submit" />
+            </form>
+        </div>
+
+
+        {% if args %}
+        <div class="args">
+            <pre>{{ args }}</pre>
+        </div>
+        {% endif %}
+
+        {% if err %}
+        <div class="error">
+            {{ err|safe }}
+        </div>
+        {% endif %}
+
+        <div class="frame">
+            {% if result != None %}
+            <div class="results">
+                <table class="ratios">
+                    <tr>
+                        {% for col in ratio_col %}
+                        <th class="resultcol">{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                    <tr class='hovercolor'>
+                        {% for ratio in ratios %}
+                        <td class="resultratio">{{ ratio|floatformat:3 }}</td>
+                        {% endfor %}
+                    </tr>
+                </table>
+                    <br>
+                    <br>
+                    <br>
+                <table class="search">
+                    <tr>
+                        <th class='gamelinkcol'> Game Link </th>
+                        {% for col in columns %}
+                        <th class='searchcol'>{{ col }}</th>
+                        {% endfor %}
+                    </tr>
+                    {% for entry in result %}
+                    <tr class='hovercolor'>
+                        <td class='gamelink'> 
+                            <a href='http://www.basketball-reference.com/boxscores/{{ entry.1 }}.html'>
+                                Game
+                            </a> 
+                        </td>
+                        {% for col in entry %}
+                        <td class='searchentry'>{{ col }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <p class="num_results">Total Calls: {{ num_results }}</p>
+            {% endif %}
+        </div>
+    </body>
+</html>

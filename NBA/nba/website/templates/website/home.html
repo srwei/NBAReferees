@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>NBA Refs Home Page</title>
+        <link rel="stylesheet" type="text/css" href="{% static "/static/main.css" %}" />
+        <style>
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+
+            background-image: url('https://images7.alphacoders.com/344/thumb-1920-344223.jpg');
+            background-position: bottom center;
+            width: 100%;
+            background-size: 65%;
+            background-repeat: no-repeat;
+        }
+
+        .header, .frame {
+            text-align: center;
+
+        }
+        .header {
+            background-color: rgb(250,131,32);
+
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>NBA Refs Home Page</h1>
+            <h3>Amanda Li, Connor Turkatte, Fernando De Stefanis, Steven Wei</h3>
+        </div>
+        <div class="frame">
+            <ul>
+                <li>This is the page for the NBA Last Two Minute Reports Search Tool: <a href={% url 'search' %}>here</a> <br>
+                    <br>
+                </li>
+                <li>This is the page for some statistics that we made on the data: <a href={% url 'stats' %}>here</a> 
+                </li>
+            </ul>
+        </div>
+        <div class = "RefImage">
+        </div>
+        <div class = "PlayerImage">
+        </div>
+    </body>
+</html>

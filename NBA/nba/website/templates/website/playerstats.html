@@ -1,0 +1,110 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Two Minute Reports Statistics</title>
+        <link rel="stylesheet" type="text/css" href="{% static "/static/main.css" %}" />
+        <style>   
+        }
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+
+        }
+        .header, .frame {
+            text-align: center;
+        }
+
+        .header {
+            background-color: rgb(250,131,32);
+        }
+
+        th {
+            text-align: left
+        }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Last Two Minute Reports Statistics</h1>
+            <h3> 
+                <a href={% url 'home' %}>
+                    Home
+                </a> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href={% url 'stats' %}>
+                    Statistics Home Page
+                </a> 
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href={% url 'search' %}>
+                    Search Tool
+                </a> 
+            </h3>
+        </div>
+        <div class="frame">
+
+            <h2>Players With Most Correct Calls In Favor Of Them</h2>
+            <table style="width:100%">
+              <tr>
+                <th>Disadvantaged Player Name</th>
+                <th>Total Number of Correct Calls(CC)</th>
+              </tr>
+              {% for entry in stat3 %}
+              <tr>
+                <td>{{ entry.0 }}</td>
+                <td>{{ entry.1 }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+            <br>
+            <br>
+            <h2>Players With Most Incorrect Calls In Favor Of Them</h2>
+            <table style="width:100%">
+              <tr>
+                <th>Disadvantaged Player Name</th>
+                <th>Total Number of Incorrect Calls(IC)</th>
+              </tr>
+              {% for entry in stat2 %}
+              <tr>
+                <td>{{ entry.0 }}</td>
+                <td>{{ entry.1 }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+            <br>
+            <br>
+
+            <h2>Players That Get Caught With Most Fouls</h2>
+            <table style="width:100%">
+              <tr>
+                <th>Committing Player Name</th>
+                <th>Total Number of Correct Calls(CC)</th>
+              </tr>
+              {% for entry in stat5 %}
+              <tr>
+                <td>{{ entry.0 }}</td>
+                <td>{{ entry.1 }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+
+            <br>
+            <br>
+
+            <h2>Players That Get Away With Most Fouls</h2>
+            <table style="width:100%">
+              <tr>
+                <th>Committing Player Name</th>
+                <th>Total Number of Incorrect Non-Calls(INC)</th>
+              </tr>
+              {% for entry in stat4 %}
+              <tr>
+                <td>{{ entry.0 }}</td>
+                <td>{{ entry.1 }}</td>
+              </tr>
+              {% endfor %}
+            </table>
+        </div>
+    </body>
+</html>
